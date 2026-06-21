@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculator Interface</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: #eef2ff;
+      font-family: Arial, sans-serif;
+    }
+
+    .calculator {
+      width: 320px;
+      background: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+      padding: 24px;
+    }
+
+    .screen {
+      width: 100%;
+      height: 72px;
+      margin-bottom: 18px;
+      border-radius: 18px;
+      border: none;
+      background: #f8fafc;
+      padding: 16px;
+      font-size: 2rem;
+      text-align: right;
+      color: #0f172a;
+      box-sizing: border-box;
+    }
+
+    .keys {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .key {
+      border: none;
+      border-radius: 16px;
+      height: 60px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      background: #f1f5f9;
+      color: #0f172a;
+      box-shadow: inset 0 -2px 0 rgba(15, 23, 42, 0.08);
+    }
+
+    .key.operator {
+      background: #6366f1;
+      color: #ffffff;
+    }
+
+    .key.control {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    .key.equals {
+      background: #10b981;
+      color: #ffffff;
+      grid-column: span 2;
+    }
+
+    .key.zero {
+      grid-column: span 2;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input class="screen" type="text" id="input" placeholder="0" readonly />
+    <div class="keys">
+      <button class="key control" onclick="clearBtn('clear')">C</button>
+      <button class="key control" onclick="clearBtn('delete')">DEL</button>
+      <button class="key operator" onclick="calcBtn('/100')">%</button>
+      <button class="key operator" onclick="calcBtn('/')">/</button>
+      <button class="key" onclick="calcBtn(7)">7</button>
+      <button class="key" onclick="calcBtn(8)">8</button>
+      <button class="key" onclick="calcBtn(9)">9</button>
+      <button class="key operator" onclick="calcBtn('*')">*</button>
+      <button class="key" onclick="calcBtn(4)">4</button>
+      <button class="key" onclick="calcBtn(5)">5</button>
+      <button class="key" onclick="calcBtn(6)">6</button>
+      <button class="key operator" onclick="calcBtn('-')">-</button>
+      <button class="key" onclick="calcBtn(1)">1</button>
+      <button class="key" onclick="calcBtn(2)">2</button>
+      <button class="key" onclick="calcBtn(3)">3</button>
+      <button class="key operator" onclick="calcBtn('+')">+</button>
+      <button class="key zero" onclick="calcBtn(0)">0</button>
+      <button class="key" onclick="calcBtn('.')">.</button>
+      <button class="key equals" onclick="equalsBtn()">=</button>
+    </div>
+  </div>
+
+  <script>
+  const calcBtn = (num) =>{
+      let userInput = document.getElementById('input')
+      userInput.value += num;
+      console.log(num);
+  }
+
+  const equalsBtn = () =>{
+    let userInput = document.getElementById('input');
+    userInput.value = eval(userInput.value)
+  }
+
+  const clearBtn = (takeOut) =>{
+    let userInput = document.getElementById('input');
+    if (takeOut === 'clear') {
+      userInput.value = ''
+    }else if(takeOut === 'delete'){
+      userInput.value = userInput.value.slice(0,-1)
+    }
+  }
+  </script>
+</body>
+</html>
